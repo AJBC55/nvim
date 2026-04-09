@@ -12,6 +12,10 @@ log() {
   printf '[setup] %s\n' "$1"
 }
 
+warn() {
+  printf '[setup] warning: %s\n' "$1" >&2
+}
+
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
     printf 'Missing required command: %s\n' "$1" >&2
@@ -21,65 +25,87 @@ require_cmd() {
 
 install_with_apt() {
   "${SUDO[@]}" apt-get update
-  "${SUDO[@]}" apt-get install -y \
-    neovim \
-    git \
-    curl \
-    ca-certificates \
-    build-essential \
-    unzip \
-    tar \
-    gzip \
-    xz-utils \
-    ripgrep \
-    fd-find \
-    nodejs \
-    npm \
-    python3 \
-    python3-pip \
+  local packages=(
+    neovim
+    git
+    curl
+    ca-certificates
+    build-essential
+    unzip
+    tar
+    gzip
+    xz-utils
+    ripgrep
+    fd-find
+    nodejs
+    npm
+    python3
+    python3-pip
     go
+  )
+  local pkg
+  for pkg in "${packages[@]}"; do
+    if ! "${SUDO[@]}" apt-get install -y "$pkg"; then
+      warn "Skipping unavailable package: $pkg"
+    fi
+  done
 }
 
 install_with_dnf() {
-  "${SUDO[@]}" dnf install -y \
-    neovim \
-    git \
-    curl \
-    ca-certificates \
-    gcc \
-    gcc-c++ \
-    make \
-    unzip \
-    tar \
-    gzip \
-    xz \
-    ripgrep \
-    fd-find \
-    nodejs \
-    npm \
-    python3 \
-    python3-pip \
+  local packages=(
+    neovim
+    git
+    curl
+    ca-certificates
+    gcc
+    gcc-c++
+    make
+    unzip
+    tar
+    gzip
+    xz
+    ripgrep
+    fd-find
+    nodejs
+    npm
+    python3
+    python3-pip
     golang
+  )
+  local pkg
+  for pkg in "${packages[@]}"; do
+    if ! "${SUDO[@]}" dnf install -y "$pkg"; then
+      warn "Skipping unavailable package: $pkg"
+    fi
+  done
 }
 
 install_with_pacman() {
-  "${SUDO[@]}" pacman -Sy --noconfirm \
-    neovim \
-    git \
-    curl \
-    ca-certificates \
-    base-devel \
-    unzip \
-    tar \
-    gzip \
-    xz \
-    ripgrep \
-    fd \
-    nodejs \
-    npm \
-    python \
-    python-pip \
+  "${SUDO[@]}" pacman -Sy --noconfirm
+  local packages=(
+    neovim
+    git
+    curl
+    ca-certificates
+    base-devel
+    unzip
+    tar
+    gzip
+    xz
+    ripgrep
+    fd
+    nodejs
+    npm
+    python
+    python-pip
     go
+  )
+  local pkg
+  for pkg in "${packages[@]}"; do
+    if ! "${SUDO[@]}" pacman -S --noconfirm "$pkg"; then
+      warn "Skipping unavailable package: $pkg"
+    fi
+  done
 }
 
 install_packages() {
@@ -122,7 +148,7 @@ bootstrap_neovim() {
   nvim --headless \
     "+Lazy! sync" \
     "+TSUpdateSync" \
-    "+MasonInstall clangd clang-format prettier stylua goimports black isort" \
+    "+lua pcall(vim.cmd, 'MasonInstall clangd clang-format prettier stylua goimports black isort')" \
     "+qa"
 }
 
