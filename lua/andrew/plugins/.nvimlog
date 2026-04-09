@@ -1,0 +1,7 @@
+WRN 2026-03-31T20:12:15.154 ?.22257    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/1BYk27/nvim.22257.0
+WRN 2026-03-31T20:12:32.561 ?.22326    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/h0a03e/nvim.22326.0
+WRN 2026-03-31T20:12:47.682 ?.22373    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/u2t81N/nvim.22373.0
+WRN 2026-03-31T20:17:40.412 ?.23121    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/I1vWru/nvim.23121.0
+WRN 2026-03-31T20:17:40.412 ?.23122    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/xZfO9K/nvim.23122.0
+WRN 2026-04-01T12:58:21.896 ?.32537    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/2glq2m/nvim.32537.0
+WRN 2026-04-01T13:24:19.620 ?.36853    server_start:193: Failed to start server: operation not permitted: /var/folders/cq/pk3wqmx16ql6r0kmcjtbx9cr0000gn/T/nvim.andre/PvMI3R/nvim.36853.0
